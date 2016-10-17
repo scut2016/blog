@@ -11,6 +11,7 @@ use yii\db\ActiveRecord;
 
 class Article extends ActiveRecord
 {
+       public $primaryKey='art_id';
         public static function tableName()
         {
             return '{{%article}}';
