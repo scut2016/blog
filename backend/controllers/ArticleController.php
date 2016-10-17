@@ -10,6 +10,7 @@ namespace backend\controllers;
 use common\models\Article;
 use yii\web\Controller;
 use yii;
+use yii\helpers\ArrayHelper;
 class ArticleController extends Controller
 {
     public $defaultAction='index';//默认的方法名
@@ -17,7 +18,13 @@ class ArticleController extends Controller
     function actionIndex()//home-admin-world
     {
 
-       $articles=Article::find()->orderBy('art_id')->all();
+       $articles=Article::find()->where(['art_id'=>[2,3,5],'cate_id'=>1])->orderBy(['art_id'=>SORT_DESC] )->all();
+        
+        $articles=ArrayHelper::toArray($articles);
+//        dd($a);
+//        $a=new Article();
+//        dd($a->findAll(['<','art_id','10']));
+//        die;
 //       $articles=new Article();
 //       dd($articles->find()->where("art_tag like '%动画%'")->asArray()->one()) ;
 //        die;
