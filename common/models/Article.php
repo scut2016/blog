@@ -29,4 +29,9 @@ class Article extends ActiveRecord
         $url="<a href='index.php?r=article/article&id=$id'>".$title."</a>";
         $this->url=$url;
     }
+    //切换数据库
+    public static function getDb()
+    {
+        return \Yii::$app->db2;  // 使用名为 "db2" 的应用组件
+    }
 }

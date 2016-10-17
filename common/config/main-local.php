@@ -9,6 +9,14 @@ return [
             'charset' => 'utf8',
             'tablePrefix'=>'blog_',//表前缀
         ],
+        'db2' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=192.168.1.44;dbname=blog',
+            'username' => 'root',
+            'password' => 'tanzhangyu',
+            'charset' => 'utf8',
+            'tablePrefix'=>'blog_',//表前缀
+        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',
