@@ -2,7 +2,7 @@
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 echo Breadcrumbs::widget([
-    'homeLink'=>['label'=>'文章首页','url'=>Url::toRoute('article/index')],
+    'homeLink'=>['label'=>'文章首页','url'=>Url::to('index')],
     'links'=>[
         [
             'label'=>$article['cate_id'],
