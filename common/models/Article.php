@@ -11,9 +11,22 @@ use yii\db\ActiveRecord;
 
 class Article extends ActiveRecord
 {
+    public $url=null;
        public $primaryKey='art_id';
         public static function tableName()
         {
             return '{{%article}}';
         }
+    public function beforeSave($bool)
+    {
+        parent::beforeSave($bool);
+    }
+    public function afterFind()
+    {
+        parent::afterFind();
+        $id=$this->art_id;
+        $title=$this->art_title;
+        $url="<a href='index.php?r=article/article&id=$id'>".$title."</a>";
+        $this->url=$url;
+    }
 }
