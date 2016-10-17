@@ -29,6 +29,8 @@ return [
         'Tree' => [
             'class' => 'helpers\Tree',
         ],
+        'ReadHttpHeader' => [
+            'class' => 'helpers\ReadHttpHeader'],
         'urlManager' => [
 
             'enablePrettyUrl' => true,//开启URL美化
