@@ -26,12 +26,12 @@ class Article extends ActiveRecord
         parent::afterFind();
         $id=$this->art_id;
         $title=$this->art_title;
-        $url="<a href='index.php?r=article/article&id=$id'>".$title."</a>";
-        $this->url=$url;
+        $this->art_title="<a href='index.php?r=article/article&id=$id'>".$title."</a>";
+//        $this->url=$url;
     }
     //切换数据库
     public static function getDb()
     {
-        return \Yii::$app->db2;  // 使用名为 "db2" 的应用组件
+        return \Yii::$app->db;  // 使用名为 "db2" 的应用组件
     }
 }
