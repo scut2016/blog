@@ -7,6 +7,7 @@ return [
             'username' => 'root',
             'password' => 'liufeng',
             'charset' => 'utf8',
+            'tablePrefix'=>'blog_',//表前缀
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
