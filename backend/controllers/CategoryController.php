@@ -12,13 +12,13 @@ use yii\web\Controller;
 use helpers\Tree;
 class CategoryController extends Controller
 {
+//    public function init(){
+//        $this->enableCsrfValidation = false;
+//    }
+//    public $enableCsrfValidation = true;
     public $layout='admin';
     function actionIndex()
     {
-
-
-
-
 //        $tree=\Yii::$app->Tree;
 ////        $tree=\Yii::$app->Tree($data,'cate_id','cate_pid');
 ////        $tree=new Tree($data,'cate_id','cate_pid');
@@ -43,16 +43,34 @@ class CategoryController extends Controller
 
     function actionUpdate()
     {
+
         $cate= new Category();
         $data=$cate->find()->select('cate_id,cate_pid,cate_name')->asArray()->all();
         $data=$cate->limitless($data);
        $request= \Yii::$app->request;
+
         $id=$request->get('cate_id',1);
 //        $cate=Category::find()->where(['cate_id'=>$id])->asArray()->one();
         $cate=Category::findOne($id);
-        $cate= ArrayHelper::toArray($cate);
-        return $this->render('update',['cate'=>$cate,'data'=>$data]);
+        $category= ArrayHelper::toArray($cate);
+
+       if($request->isPost)
+        {
+            $cate->cate_title=$request->post('cate_title');
+            $cate->cate_pid=($request->post('cate_pid')==$category['cate_id'])?$category['cate_pid']:$request->post('cate_pid');
+            $cate->cate_keywords=$request->post('cate_keywords');
+            $cate->cate_description=$request->post('cate_description');
+//            $c= ArrayHelper::toArray($cate);
+//            dd($c);
+//            die;
+            $cate->save();
+            $this->refresh();
+        }
+
+        return $this->render('update',['cate'=>$category,'data'=>$data]);
     }
+    
+    
 
 
 }
