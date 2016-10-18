@@ -34,4 +34,12 @@ class Category extends ActiveRecord
         return $arr;
     }
 
+    public function afterSave($insert, $changedAttributes)
+    {
+//        dd( $changedAttributes) ;
+        parent::afterSave($insert, $changedAttributes); 
+//        $this->refresh();
+    }
+
+
 }
