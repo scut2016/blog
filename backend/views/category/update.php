@@ -21,20 +21,23 @@
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-        <form action="#" method="post">
+        <form action="" method="post">
+            <input type="hidden"
+                   name="<?= \Yii::$app->request->csrfParam; ?>"
+                   value="<?= \Yii::$app->request->getCsrfToken();?>">
             <table class="add_tab">
                 <tbody>
                     <tr>
-                        <th width="120"><i class="require">*</i>分类：</th>
+                        <th width="120"><i class="require">*</i>父分类：</th>
                         <td>
-                            <select name="">
+                            <select name="cate_pid">
                                 <?foreach ($data as $key=>$v):?>
-                                    <?
-                                    if($v['cate_id']==$cate['cate_id']):?>
+                                    <?if($v['cate_id']==$cate['cate_id']):?>
                                    <option selected='selected' value="<?=$v['cate_id']?>"><?=$v['html']?></option>
-                                    <?endif;?>
+                                    <?else:?>
                                 <option value="<?=$v['cate_id']?>"><?=$v['html']?></option>
 
+                                    <?endif;?>
                                 <?endforeach;?>
                               </select>
                         </td>
@@ -42,14 +45,14 @@
                     <tr>
                         <th><i class="require">*</i>标题：</th>
                         <td>
-                            <input type="text" class="lg" name="" value="<?=$cate['cate_title']?>">
+                            <input type="text" class="lg" name="cate_title" value="<?=$cate['cate_title']?>">
                             <p>标题可以写30个字</p>
                         </td>
                     </tr>
                     <tr>
                         <th>关键字：</th>
                         <td>
-                            <input type="text" name="" value="<?=$cate['cate_keywords']?>">
+                            <input type="text" name="cate_keywords" value="<?=$cate['cate_keywords']?>">
                             <span><i class="fa fa-exclamation-circle yellow"></i>这里是默认长度</span>
                         </td>
                     </tr>
@@ -57,10 +60,10 @@
                     <tr>
                         <th>描述：</th>
                         <td>
-                            <textarea name="discription"><?=$cate['cate_description']?></textarea>
+                            <textarea name="cate_description"><?=$cate['cate_description']?></textarea>
                         </td>
                     </tr>
-                    
+
                     <tr>
                         <th></th>
                         <td>
