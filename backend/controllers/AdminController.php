@@ -6,15 +6,16 @@
  */
 
 namespace backend\controllers;
-
-
 use yii\web\Controller;
-
 class AdminController extends Controller
 {
     public $layout='admin';
     function actionIndex()
     {
         return $this->render('index');
+    }
+    function actionInfo()
+    {
+        return $this->render('info');
     }
 }

@@ -12,9 +12,9 @@ use yii\web\Controller;
 use helpers\Tree;
 class CategoryController extends Controller
 {
+    public $layout='admin';
     function actionIndex()
     {
-
 
        $cate= new Category();
        $data=$cate->find()->select('cate_id,cate_pid,cate_name')->asArray()->all();
@@ -30,6 +30,11 @@ class CategoryController extends Controller
 //        dd($tree::sort(0,0));
 //       $data=$cate->limitless($data);
 //        dd($data);
+    }
+
+    function actionList()
+    {
+        return $this->render('list');
     }
 
 
