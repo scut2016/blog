@@ -8,6 +8,7 @@
 namespace common\models;
 
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 
 class Article extends ActiveRecord
 {
@@ -26,7 +27,7 @@ class Article extends ActiveRecord
         parent::afterFind();
         $id=$this->art_id;
         $title=$this->art_title;
-        $this->art_title="<a href='index.php?r=article/article&id=$id'>".$title."</a>";
+        $this->art_title="<a href='".Url::toRoute($id)."'>".$title."</a>";
 //        $this->url=$url;
     }
     //切换数据库

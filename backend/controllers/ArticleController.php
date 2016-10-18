@@ -21,6 +21,8 @@ class ArticleController extends Controller
        $articles=Article::find()->where(['art_id'=>[2,3,5],'cate_id'=>1])->orderBy(['art_id'=>SORT_DESC] )->all();
         
         $articles=ArrayHelper::toArray($articles);
+        
+//        dd($articles);
 //        dd($a);
 //        $a=new Article();
 //        dd($a->findAll(['<','art_id','10']));
