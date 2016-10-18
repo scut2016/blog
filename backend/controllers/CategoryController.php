@@ -9,7 +9,7 @@ namespace backend\controllers;
 use common\models\Category;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
-use helpers\Tree;
+use common\components\Tree;
 class CategoryController extends Controller
 {
 //    public function init(){
@@ -70,7 +70,32 @@ class CategoryController extends Controller
         return $this->render('update',['cate'=>$category,'data'=>$data]);
     }
     
-    
+    function actionDelete()
+    {
+        if(\Yii::$app->request->isGet)
+        {
+            $cate= new Category();
+            $data=$cate->find()->select('cate_id,cate_pid,cate_name')->asArray()->all();
+            $id=\Yii::$app->request->get('cate_id');
+            $tree=new Tree($data,'cate_id','cate_pid');
+            $deleteArr=$tree->sons($id);
+            $arr=[];
+            $arr[]=$id;
+            foreach ($deleteArr as $key=>$value)
+            {
+                $arr[]=$value['cate_id'];
+            }
+            $cate->deleteAll(['in','cate_id',$arr]);
+            $this->redirect('list');
+//            dd($arr);
+        }
+      
+//$t=\Yii::$app->Tree->($data,'cate_id','cate_pid');
+//      $tt=  new $t($data,'cate_id','cate_pid');
+//        dd($t);
+//        dd($tree->parents(21));
+//       dd($tree->ancestor(21));
+    }
 
 
 }
