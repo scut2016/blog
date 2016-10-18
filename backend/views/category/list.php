@@ -69,7 +69,7 @@
                         <td><?=$v['cate_view']?></td>
                         <td><?=$v['cate_keywords']?></td>
                         <td>
-                            <a href="#">修改</a>
+                            <a href="<?=\yii\helpers\Url::toRoute(['category/update','cate_id'=>$v['cate_id']])?>">修改</a>
                             <a href="#">删除</a>
                         </td>
                     </tr>

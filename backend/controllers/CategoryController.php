@@ -7,6 +7,7 @@
 
 namespace backend\controllers;
 use common\models\Category;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use helpers\Tree;
 class CategoryController extends Controller
@@ -38,6 +39,19 @@ class CategoryController extends Controller
         $data=$cate->limitless($data);
 //        dd($data);
         return $this->render('list',['data'=>$data]);
+    }
+
+    function actionUpdate()
+    {
+        $cate= new Category();
+        $data=$cate->find()->select('cate_id,cate_pid,cate_name')->asArray()->all();
+        $data=$cate->limitless($data);
+       $request= \Yii::$app->request;
+        $id=$request->get('cate_id',1);
+//        $cate=Category::find()->where(['cate_id'=>$id])->asArray()->one();
+        $cate=Category::findOne($id);
+        $cate= ArrayHelper::toArray($cate);
+        return $this->render('update',['cate'=>$cate,'data'=>$data]);
     }
 
 
