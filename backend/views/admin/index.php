@@ -33,7 +33,7 @@ $this->title = '后台管理首页';
             	<h3><i class="fa fa-fw fa-clipboard"></i>常用操作</h3>
                 <ul class="sub_menu">
                     <li><a href="add.html" target="main"><i class="fa fa-fw fa-plus-square"></i>添加页</a></li>
-                    <li><a href="list.html" target="main"><i class="fa fa-fw fa-list-ul"></i>列表页</a></li>
+                    <li><a href="<?=\yii\helpers\Url::toRoute('category/list')?>" target="main"><i class="fa fa-fw fa-list-ul"></i>列表页</a></li>
                     <li><a href="tab.html" target="main"><i class="fa fa-fw fa-list-alt"></i>tab页</a></li>
                     <li><a href="img.html" target="main"><i class="fa fa-fw fa-image"></i>图片列表</a></li>
                 </ul>
@@ -60,7 +60,7 @@ $this->title = '后台管理首页';
 
 	<!--主体部分 开始-->
 	<div class="main_box">
-		<iframe src="info.html" frameborder="0" width="100%" height="100%" name="main"></iframe> 
+		<iframe src="<?=\yii\helpers\Url::toRoute('admin/info')?>" frameborder="0" width="100%" height="100%" name="main"></iframe>
 	</div>
 	<!--主体部分 结束-->
 
