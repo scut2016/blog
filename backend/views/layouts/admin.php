@@ -14,8 +14,7 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <?=Html::cssFile('@web/back/css/ch-ui.admin.css')?>
-    <?=Html::cssFile('@web/back/font/css/font-awesome.min.css')?>
+
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -24,6 +23,8 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
     <div class="container">
+        <?=Html::cssFile('@web/back/css/ch-ui.admin.css')?>
+        <?=Html::cssFile('@web/back/font/css/font-awesome.min.css')?>
         <?= $content ?>
     </div>
 

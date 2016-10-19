@@ -4,7 +4,7 @@
 use yii\helpers\Html;
 ?>
 <?=Html::jsFile('@web/back/js/ch-ui.admin.js')?>
-$this->title = '后台管理首页';
+<?$this->title = '后台管理首页';
 ?>
 
 	<!--头部 开始-->

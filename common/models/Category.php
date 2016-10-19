@@ -42,6 +42,7 @@ class Category extends ActiveRecord
     }
     public function rules(){
         return [
+            [['cate_name'],'required','message' => '分类名称不能为空'],
            [['cate_name','cate_title','cate_description','cate_keywords','cate_pid'] ,'safe']
         ];
     }

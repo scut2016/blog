@@ -6,6 +6,7 @@
  */
 
 namespace backend\controllers;
+use common\components\PinYin;
 use common\models\Category;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -95,6 +96,26 @@ class CategoryController extends Controller
 //        dd($t);
 //        dd($tree->parents(21));
 //       dd($tree->ancestor(21));
+    }
+
+    function actionTest()
+    {
+        $p=new PinYin();
+        $str='微微一笑很倾城';
+        echo $p::encode($str);
+    }
+
+    function actionAdd()
+    {
+
+        $cate=new Category();
+//        $arr=compact('cate','a','b','c');
+        if($cate->load(\Yii::$app->request->post()) && $cate->save())
+        {
+            echo "分类添加成功";
+            dd(\Yii::$app->request->post());
+        }
+        return $this->render('add',['model'=>$cate]);
     }
 
 
