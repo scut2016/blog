@@ -2,11 +2,11 @@
 /**
  * 文件名：UEditor.php
  * 文件说明:
- * 时间: 2016/10/19.13:20
+ * 时间: 2016/10/19.15:02
  */
 
 namespace common\components\ueditor;
-
+use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
@@ -32,9 +32,9 @@ class UEditor extends InputWidget
         }
         $this->_options = [
             'serverUrl' => Url::to(['upload']),
-            'initialFrameWidth' => '90%',
-            'initialFrameHeight' => '600',
-            'lang' => (strtolower(\Yii::$app->language) == 'en-us') ? 'en' : 'zh-cn',
+            'initialFrameWidth' => '100%',
+            'initialFrameHeight' => '400',
+            'lang' => (strtolower(Yii::$app->language) == 'en-us') ? 'en' : 'zh-cn',
         ];
         $this->clientOptions = ArrayHelper::merge($this->_options, $this->clientOptions);
         parent::init();

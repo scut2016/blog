@@ -2,9 +2,8 @@
 /**
  * 文件名：UEditorAction.php
  * 文件说明:
- * 时间: 2016/10/19.13:23
+ * 时间: 2016/10/19.15:01
  */
-
 namespace common\components\ueditor;
 use Yii;
 use yii\base\Action;

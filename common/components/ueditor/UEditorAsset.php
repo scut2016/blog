@@ -8,12 +8,17 @@
 namespace common\components\ueditor;
 
 use yii\web\AssetBundle;
+use yii\web\View;
+
 class UEditorAsset extends AssetBundle
 {
     public $js = [
         'ueditor.config.js',
         'ueditor.all.js',
     ];
+//    public $jsOptions=[
+//        'position'=>View::POS_BEGIN,
+//    ];
 
     public function init()
     {
