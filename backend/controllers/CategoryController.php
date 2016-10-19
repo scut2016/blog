@@ -107,15 +107,20 @@ class CategoryController extends Controller
 
     function actionAdd()
     {
-
         $cate=new Category();
 //        $arr=compact('cate','a','b','c');
         if($cate->load(\Yii::$app->request->post()) && $cate->save())
         {
-            echo "分类添加成功";
-            dd(\Yii::$app->request->post());
+            $this->redirect('list');
+//            dd(\Yii::$app->request->post());
         }
-        return $this->render('add',['model'=>$cate]);
+        $data=$cate->find()->select('cate_id,cate_pid,cate_name')->asArray()->all();
+        $data=$cate->limitless($data);
+//        dd($data);
+        $data=ArrayHelper::map($data,'cate_id','html');
+        $data[0]='顶级分类';
+//        dd($data);
+        return $this->render('add',['model'=>$cate,'data'=>$data]);
     }
 
 

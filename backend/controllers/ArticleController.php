@@ -43,5 +43,32 @@ class ArticleController extends Controller
         $article=Article::find()->where(['art_id'=>$id])->asArray()->one();
         return $this->render('article',['article'=>$article]);
     }
+    
+    function actionAdd()
+    {
+        $model=new Article();
+        dd(\Yii::$app->request->post());
+        dd($model->load(\Yii::$app->request->post()));
+        dd($model->save());
+//        if($model->load(\Yii::$app->request->post()) && $model->save())
+//        {
+//            $this->redirect('index');
+////            dd(\Yii::$app->request->post());
+//        }
+        return $this->render('add',['model'=>$model]);
+    }
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => 'common\components\ueditor\UEditorAction',
+                'config' => [
+                    "imageUrlPrefix"  => "http://www.baidu.com",//图片访问路径前缀
+                    "imagePathFormat" => "/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径
+                     "imageRoot" => Yii::getAlias("@webroot"),
+            ],
+        ]
+    ];
+}
   
 }
