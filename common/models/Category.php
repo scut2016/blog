@@ -40,6 +40,11 @@ class Category extends ActiveRecord
         parent::afterSave($insert, $changedAttributes); 
 //        $this->refresh();
     }
+    public function rules(){
+        return [
+           [['cate_name','cate_title','cate_description','cate_keywords','cate_pid'] ,'safe']
+        ];
+    }
 
 
 }
