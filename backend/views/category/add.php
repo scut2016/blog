@@ -13,7 +13,10 @@ use yii\widgets\ActiveForm;
 <?= $form->field($model, 'cate_title')->label('分类标题')->textInput() ?>
 <?= $form->field($model, 'cate_keywords')->label('分类关键字')->textInput() ?>
 <?= $form->field($model, 'cate_description')->label('分类描述')->textarea() ?>
-<?= $form->field($model, 'cate_pid')->label('父分类')->textInput() ?>
+
+<?//= $form->field($model, 'cate_pid')->label('父分类')->textInput() ?>
+<?= $form->field($model, 'cate_pid')->dropDownList(
+   $data, ['prompt'=>'请选择',]) ?>
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
             <?= Html::submitButton('保存', ['class' => 'btn btn-primary']) ?>
