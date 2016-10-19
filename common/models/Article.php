@@ -18,10 +18,10 @@ class Article extends ActiveRecord
         {
             return '{{%article}}';
         }
-    public function beforeSave($bool)
-    {
-        parent::beforeSave($bool);
-    }
+//    public function beforeSave($bool)
+//    {
+//        parent::beforeSave($bool);
+//    }
     public function afterFind()
     {
         parent::afterFind();
@@ -34,5 +34,10 @@ class Article extends ActiveRecord
     public static function getDb()
     {
         return \Yii::$app->db;  // 使用名为 "db2" 的应用组件
+    }
+    public function rules(){
+        return [
+            [['art_title','art_description','art_content','art_tag','cate_id'] ,'safe']
+        ];
     }
 }
