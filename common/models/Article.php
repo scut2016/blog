@@ -7,6 +7,7 @@
 
 namespace common\models;
 
+use common\components\Tree;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 
@@ -36,6 +37,15 @@ class Article extends ActiveRecord
     {
         parent::afterFind();
 //        $id=$this->art_id;
+        $cate=Category::find()->asArray()->all();
+        $tree=new Tree($cate,'cate_id','cate_pid');
+//        dd($tree->parents($this->art_cate_id));
+        $arr=[];
+        foreach ($tree->parents($this->art_cate_id) as $v)
+        {
+            $arr[]=$v['cate_id'];
+        }
+        Category::updateAllCounters(['cate_view'=>1],['in','cate_id',$arr]);
         $this->art_view+=1;
         $this->save();
     }

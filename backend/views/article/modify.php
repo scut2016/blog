@@ -11,23 +11,22 @@ use yii\widgets\ActiveForm;
     'options' => ['class' => 'form-horizontal'],
 ]) ?>
 <div class="form-group">
-    <label for="exampleInputEmail1">文章标题</label>
-    <?=Html::input('text','art_title',$data['art_title'],['class'=>'form-control',])?>
+    <?= $form->field($data, 'art_title')->label('文章标题')->hint('Please enter your name')->textInput() ?>
 </div>
 <div class="form-group">
-    <label for="exampleInputEmail1">文章标签</label>
-<?=Html::input('text','art_tag',$data['art_tag'],['class'=>'form-control'])?>
+    <?= $form->field($data, 'art_tag')->label('文章关键字')->hint('Please enter your name')->textInput() ?>
 </div>
 <div class="form-group">
-        <label for="exampleInputEmail1">文章描述</label>
-<?=Html::textarea('art_description',$data['art_description'],['class'=>'form-control'])?>
+    <?= $form->field($data, 'art_description')->label('文章描述')->hint('Please enter your name')->textInput() ?>
+
 </div>
-    <div class="form-group">
-            <label for="exampleInputEmail1">文章分类</label>
-        <?=Html::input('text','art_cate_id',$data['art_cate_id'],['class'=>'form-control'])?>
-    </div>
 <div class="form-group">
-    <?= $form->field(\common\models\Article::findOne($data['art_id']),'art_content')->label('文章内容')->widget(UEditor::className(),['clientOptions' => [
+    <?= $form->field($data, 'art_cate_id')->label('文章分类')->hint('Please enter your name')->textInput() ?>
+
+</div>
+<div class="form-group">
+
+    <?= $form->field($data,'art_content')->label('文章内容')->widget(UEditor::className(),['clientOptions' => [
         //编辑区域大小
 //    'initialFrameHeight' => '200',
         //设置语言

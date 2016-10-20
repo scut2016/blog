@@ -103,7 +103,13 @@ class ArticleController extends Controller
 }
   public function actionModify()
   {
-     $data= Article::findOne(3);
+      $id=Yii::$app->request->get('id');
+      $data= Article::findOne($id);
+     if($data->load(Yii::$app->request->post()) && $data->save())
+     {
+         $this->redirect(['article','id'=>$id]);
+     }
+
         return $this->render('modify',['data'=>$data]);
   }
 }
