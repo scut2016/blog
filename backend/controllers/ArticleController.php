@@ -101,9 +101,9 @@ class ArticleController extends Controller
         ]
     ];
 }
-  public function actionTest()
+  public function actionModify()
   {
-     
-
+     $data= Article::findOne(3);
+        return $this->render('modify',['data'=>$data]);
   }
 }
