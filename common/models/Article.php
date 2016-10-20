@@ -52,6 +52,6 @@ class Article extends ActiveRecord
     }
     public function getCategory()
     {
-        return $this->hasOne(Category::className(),['cate_id'=>'cate_id'])->asArray();
+        return $this->hasOne(Category::className(),['cate_id'=>'art_cate_id'])->asArray();
     }
 }

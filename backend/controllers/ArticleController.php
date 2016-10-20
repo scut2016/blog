@@ -20,10 +20,11 @@ class ArticleController extends Controller
     function actionIndex()//home-admin-world
     {
 
-       $articles=Article::find()->where(['art_id'=>[2,3,5],'cate_id'=>1])->orderBy(['art_id'=>SORT_DESC] )->all();
-        
-        $articles=ArrayHelper::toArray($articles);
-        
+//       $articles=Article::find()->where(['art_id'=>[2,3,5],'cate_id'=>1])->orderBy(['art_id'=>SORT_DESC] )->all();
+      $articles=Article::find()->with('category')->orderBy('art_id')->asArray()->all();
+
+//        $articles=ArrayHelper::toArray($articles);
+//        dd($articles);
 //        dd($articles);
 //        dd($a);
 //        $a=new Article();

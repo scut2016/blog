@@ -7,6 +7,7 @@
 
 namespace backend\controllers;
 use common\components\PinYin;
+use common\models\Article;
 use common\models\Category;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -17,7 +18,7 @@ class CategoryController extends Controller
 //        $this->enableCsrfValidation = false;
 //    }
 //    public $enableCsrfValidation = true;
-    public $layout='admin';
+//    public $layout='admin';
     function actionIndex()
     {
 //        $tree=\Yii::$app->Tree;
@@ -121,6 +122,22 @@ class CategoryController extends Controller
         $data[0]='顶级分类';
 //        dd($data);
         return $this->render('add',['model'=>$cate,'data'=>$data]);
+    }
+
+    function actionCategory()
+    {
+        $id=\Yii::$app->request->get('id');
+        $allCategory=Category::find()->asArray()->all();
+        $tree=new Tree($allCategory,'cate_id','cate_pid');
+        $arr[]=$id;
+        foreach ($tree->sons($id) as $k=>$v )
+        {
+            $arr[]=$v['cate_id'];
+        }
+//        dd($arr);
+        $articles=Article::find()->where(['in','art_cate_id',$arr])->all();
+//        dd($articles);
+        return $this->render('//article/index',['data'=>$articles]);
     }
 
 

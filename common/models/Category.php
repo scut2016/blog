@@ -46,6 +46,9 @@ class Category extends ActiveRecord
            [['cate_name','cate_title','cate_description','cate_keywords','cate_pid'] ,'safe']
         ];
     }
-
+public function getArticles()
+{
+    return $this->hasMany(Article::className(),['art_cate_id'=>'cate_id'])->asArray();
+}
 
 }
