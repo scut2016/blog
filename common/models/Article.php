@@ -35,10 +35,10 @@ class Article extends ActiveRecord
     public function afterFind()
     {
         parent::afterFind();
-        $id=$this->art_id;
-        $title=$this->art_title;
-        $this->art_title="<a href='".Url::toRoute($id)."'>".$title."</a>";
-//        $this->url=$url;
+//        $id=$this->art_id;
+//        $title=$this->art_title;
+//        $this->art_title="<a href='".Url::toRoute($id)."'>".$title."</a>";
+////        $this->url=$url;
     }
     //切换数据库
     public static function getDb()
@@ -49,5 +49,9 @@ class Article extends ActiveRecord
         return [
             [['art_title','art_description','art_content','art_tag','cate_id'] ,'safe']
         ];
+    }
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(),['cate_id'=>'cate_id'])->asArray();
     }
 }

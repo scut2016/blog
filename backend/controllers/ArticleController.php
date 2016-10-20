@@ -7,7 +7,9 @@
 
 namespace backend\controllers;
 
+use common\components\Tree;
 use common\models\Article;
+use common\models\Category;
 use yii\web\Controller;
 use yii;
 use yii\helpers\ArrayHelper;
@@ -40,16 +42,40 @@ class ArticleController extends Controller
     {
         $request=Yii::$app->request;
        $id=$request->get('id');
-        $article=Article::find()->where(['art_id'=>$id])->asArray()->one();
-        return $this->render('article',['article'=>$article]);
+//        $article=Article::find()->where(['art_id'=>$id])->asArray()->one();
+
+        $art=Article::findOne($id);
+//     $cate=Category::findOne(['cate_id'=>$art->cate_id]);
+        $cate=$art->category;
+//      $cate=$art->getCategory();
+        $allCategory=Category::find()->asArray()->all();
+//        dd($allCategory);
+        $tree=new Tree($allCategory,'cate_id','cate_pid');
+        $url=$tree->parents($cate['cate_id']);
+//        dd($url);
+        $arr=[];
+        foreach ($url as $k=>$v)
+        {
+            $arr[$k]['label']=$v['cate_name'];
+            $arr[$k]['url']=yii\helpers\Url::toRoute(['category/category','id'=>$v['cate_id']]);
+        }
+        $arr=array_reverse($arr);
+        $arr[]['label']=$art->art_title;
+
+//        dd($arr);
+        
+        return $this->render('article',['article'=>$arr,'data'=>$art]);
     }
     
     function actionAdd()
     {
         $model=new Article();
-        dd(\Yii::$app->request->post());
-        dd($model->load(\Yii::$app->request->post()));
-        dd($model->save());
+        
+        if($model->load(\Yii::$app->request->post()) &&$model->save())
+        {
+
+            dd(\Yii::$app->request->post());
+        }
 //        if($model->load(\Yii::$app->request->post()) && $model->save())
 //        {
 //            $this->redirect('index');
@@ -63,12 +89,16 @@ class ArticleController extends Controller
             'upload' => [
                 'class' => 'common\components\ueditor\UEditorAction',
                 'config' => [
-                    "imageUrlPrefix"  => "http://www.baidu.com",//图片访问路径前缀
+                    "imageUrlPrefix"  => "",//图片访问路径前缀
                     "imagePathFormat" => "/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", //上传保存路径
                      "imageRoot" => Yii::getAlias("@webroot"),
             ],
         ]
     ];
 }
-  
+  public function actionTest()
+  {
+     
+
+  }
 }

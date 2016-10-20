@@ -9,7 +9,7 @@ use common\components\ueditor\UEditor;
     'action'=>'',
     'options' => ['class' => 'form-horizontal'],
 ]) ?>
-<?= $form->field($model, 'art_title',['options'=>['class'=>'']])->label('文章标题')->hint('Please enter your name')->textInput() ?>
+<?= $form->field($model, 'art_title',['options'=>['value'=>'123']])->label('文章标题')->hint('Please enter your name')->textInput() ?>
 
 <?= $form->field($model, 'art_tag')->label('文章关键字')->textInput() ?>
 <?= $form->field($model, 'art_description')->label('文章描述')->textInput() ?>
@@ -20,17 +20,18 @@ use common\components\ueditor\UEditor;
     //设置语言
     'lang' =>'zh-cn', //中文为 zh-cn  en
     //定制菜单
-    'toolbars' => [
-        [
-            'fullscreen', 'source', 'undo', 'redo', '|',
-            'fontsize',
-            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat',
-            'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|',
-            'forecolor', 'backcolor', '|',
-            'lineheight', '|',
-            'indent', '|'
-        ],
-    ]]]);
+//    'toolbars' => [
+//        [
+//            'fullscreen', 'source', 'undo', 'redo', '|',
+//            'fontsize',
+//            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat',
+//            'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|',
+//            'forecolor', 'backcolor', '|',
+//            'lineheight', '|',
+//            'indent', '|'
+//        ],
+//    ]
+]]);
 ?>
 <div class="form-group">
     <div class="col-lg-offset-1 col-lg-11">
