@@ -24,7 +24,7 @@ class ArticleController extends Controller
 
         $articles=Article::find();
         $pages = new yii\data\Pagination(['totalCount' =>$articles->count(), 'pageSize' => '5']);
-      $data=$articles->with('category')->offset($pages->offset)->limit($pages->limit)->orderBy('art_id')->asArray()->all();
+      $data=$articles->with('category')->offset($pages->offset)->limit($pages->limit)->orderBy(['art_view'=>SORT_DESC])->asArray()->all();
 
 //        $articles=ArrayHelper::toArray($articles);
 //        dd($articles);

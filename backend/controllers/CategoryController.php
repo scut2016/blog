@@ -140,7 +140,7 @@ class CategoryController extends Controller
 
         $articles=Article::find()->andWhere(['art_cate_id'=>$arr]);
         $pages = new Pagination(['totalCount' =>$articles->count(), 'pageSize' => '5']);
-        $data=$articles->with('category')->offset($pages->offset)->limit($pages->limit)->orderBy('art_id')->asArray()->all();
+        $data=$articles->with('category')->offset($pages->offset)->limit($pages->limit)->orderBy('art_view')->asArray()->all();
 
 
         
