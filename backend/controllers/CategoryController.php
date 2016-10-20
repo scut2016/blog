@@ -11,6 +11,7 @@ use common\models\Article;
 use common\models\Category;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\Controller;
 use common\components\Tree;
 class CategoryController extends Controller
@@ -142,10 +143,24 @@ class CategoryController extends Controller
         $data=$articles->with('category')->offset($pages->offset)->limit($pages->limit)->orderBy('art_id')->asArray()->all();
 
 
+        
+        //生成面包屑导航
+        $allCategory=Category::find()->asArray()->all();
+//        dd($allCategory);
+        $tree=new Tree($allCategory,'cate_id','cate_pid');
+        $url=$tree->parents($id);
+//        dd($url);
+        $arr=[];
+        foreach ($url as $k=>$v)
+        {
+            $arr[$k]['label']=$v['cate_name'];
+            $arr[$k]['url']=Url::toRoute(['category/category','id'=>$v['cate_id']]);
+        }
+        $arr=array_reverse($arr);
 
 //        $articles=Article::find()->where(['in','art_cate_id',$arr])->all();
 //        dd($articles);
-        return $this->render('//article/index',['data'=>$data,'pages'=>$pages]);
+        return $this->render('//article/index',['data'=>$data,'pages'=>$pages,'id'=>$id,'arr'=>$arr]);
     }
 
 

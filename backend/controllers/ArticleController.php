@@ -23,7 +23,7 @@ class ArticleController extends Controller
 //       $articles=Article::find()->where(['art_id'=>[2,3,5],'cate_id'=>1])->orderBy(['art_id'=>SORT_DESC] )->all();
 
         $articles=Article::find();
-        $pages = new yii\data\Pagination(['totalCount' =>$articles->count(), 'pageSize' => '1']);
+        $pages = new yii\data\Pagination(['totalCount' =>$articles->count(), 'pageSize' => '5']);
       $data=$articles->with('category')->offset($pages->offset)->limit($pages->limit)->orderBy('art_id')->asArray()->all();
 
 //        $articles=ArrayHelper::toArray($articles);
@@ -40,15 +40,16 @@ class ArticleController extends Controller
 
 //        $data=Article::find();
 //        $data=$data->asArray()->orderBy('art_id')->all();
-     return  $this->render('index',['data'=>$data,'pages' => $pages]);
+     return  $this->render('index',['data'=>$data,'pages' => $pages,'id'=>0]);
     }
     function actionArticle()
     {
         $request=Yii::$app->request;
        $id=$request->get('id');
 //        $article=Article::find()->where(['art_id'=>$id])->asArray()->one();
-
         $art=Article::findOne($id);
+//        $art->art_view=$art->art_view+1;
+//        $art->save();
 //     $cate=Category::findOne(['cate_id'=>$art->cate_id]);
         $cate=$art->category;
 //      $cate=$art->getCategory();
