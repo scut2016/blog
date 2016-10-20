@@ -36,9 +36,8 @@ class Article extends ActiveRecord
     {
         parent::afterFind();
 //        $id=$this->art_id;
-//        $title=$this->art_title;
-//        $this->art_title="<a href='".Url::toRoute($id)."'>".$title."</a>";
-////        $this->url=$url;
+        $this->art_view+=1;
+        $this->save();
     }
     //切换数据库
     public static function getDb()
@@ -47,7 +46,7 @@ class Article extends ActiveRecord
     }
     public function rules(){
         return [
-            [['art_title','art_description','art_content','art_tag','cate_id'] ,'safe']
+            [['art_title','art_description','art_content','art_tag','art_cate_id'] ,'safe']
         ];
     }
     public function getCategory()
