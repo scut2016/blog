@@ -9,6 +9,7 @@ namespace backend\controllers;
 use common\components\PinYin;
 use common\models\Article;
 use common\models\Category;
+use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use common\components\Tree;
@@ -135,9 +136,16 @@ class CategoryController extends Controller
             $arr[]=$v['cate_id'];
         }
 //        dd($arr);
-        $articles=Article::find()->where(['in','art_cate_id',$arr])->all();
+
+        $articles=Article::find()->andWhere(['art_cate_id'=>$arr]);
+        $pages = new Pagination(['totalCount' =>$articles->count(), 'pageSize' => '5']);
+        $data=$articles->with('category')->offset($pages->offset)->limit($pages->limit)->orderBy('art_id')->asArray()->all();
+
+
+
+//        $articles=Article::find()->where(['in','art_cate_id',$arr])->all();
 //        dd($articles);
-        return $this->render('//article/index',['data'=>$articles]);
+        return $this->render('//article/index',['data'=>$data,'pages'=>$pages]);
     }
 
 

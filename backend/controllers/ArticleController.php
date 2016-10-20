@@ -21,7 +21,10 @@ class ArticleController extends Controller
     {
 
 //       $articles=Article::find()->where(['art_id'=>[2,3,5],'cate_id'=>1])->orderBy(['art_id'=>SORT_DESC] )->all();
-      $articles=Article::find()->with('category')->orderBy('art_id')->asArray()->all();
+
+        $articles=Article::find();
+        $pages = new yii\data\Pagination(['totalCount' =>$articles->count(), 'pageSize' => '1']);
+      $data=$articles->with('category')->offset($pages->offset)->limit($pages->limit)->orderBy('art_id')->asArray()->all();
 
 //        $articles=ArrayHelper::toArray($articles);
 //        dd($articles);
@@ -37,7 +40,7 @@ class ArticleController extends Controller
 
 //        $data=Article::find();
 //        $data=$data->asArray()->orderBy('art_id')->all();
-     return  $this->render('index',['data'=>$articles]);
+     return  $this->render('index',['data'=>$data,'pages' => $pages]);
     }
     function actionArticle()
     {
