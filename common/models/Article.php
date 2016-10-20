@@ -18,10 +18,20 @@ class Article extends ActiveRecord
         {
             return '{{%article}}';
         }
-//    public function beforeSave($bool)
-//    {
-//        parent::beforeSave($bool);
-//    }
+    //给文章加上时间戳
+    public function beforeSave($bool)
+    {
+        if(parent::beforeSave($bool)){
+            if($this->isNewRecord){
+                $this->art_time = time();
+            }else{
+                $this->art_time = time();
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
     public function afterFind()
     {
         parent::afterFind();
