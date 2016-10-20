@@ -7,4 +7,6 @@
         <td class="active"><a href="<?=\yii\helpers\Url::toRoute(['category/category','id'=>$v['category']['cate_id']])?>"><?=$v['category']['cate_name']?></a></td>
     </tr>
     <? endforeach;?>
+    
 </table>
+<?=\yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
